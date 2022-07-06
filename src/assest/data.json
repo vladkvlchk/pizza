@@ -1,0 +1,84 @@
+{
+    "pizzas": [
+        {
+            "id": 0,
+            "imageUrl": "https://dodopizza-a.akamaihd.net/static/Img/Products/5630c6ed3f394c7ba25e1ef79a67b7ee_138x138.jpeg",
+            "name": "Ветчина и сыр",
+            "types": [0],
+            "sizes": [26,30,40],
+            "price": 329,
+            "category": ["Мясные"],
+            "rating": 4
+        },
+        {
+            "id": 1,
+            "imageUrl": "https://dodopizza-a.akamaihd.net/static/Img/Products/eb6d128bbcd340e98fd4f14b377e769f_138x138.jpeg",
+            "name": "Пепперони фреш",
+            "types": [0],
+            "sizes": [26,30,40],
+            "price": 299,
+            "category": ["Мясные"],
+            "rating": 6
+        },
+        {
+            "id": 2,
+            "imageUrl": "https://dodopizza-a.akamaihd.net/static/Img/Products/a02280d5dd9342f7925538752be9b521_138x138.jpeg",
+            "name": "Четыре сезона",
+            "types": [0],
+            "sizes": [26,30,40],
+            "price": 9,
+            "category": ["Мясные", "Гриль", "Острые"],
+            "rating": 8
+        },
+        {
+            "id": 3,
+            "imageUrl": "https://dodopizza-a.akamaihd.net/static/Img/Products/bf3377af7cfe4962915668d14bb8d0f4_138x138.jpeg",
+            "name": "Пепперони",
+            "types": [0],
+            "sizes": [26,30,40],
+            "price": 439,
+            "category": ["Мясные"],
+            "rating": 5
+        },
+        {
+            "id": 4,
+            "imageUrl": "https://dodopizza-a.akamaihd.net/static/Img/Products/f440c85c436a4284afad6ecfc43c1fab_138x138.jpeg",
+            "name": "Чоризо фреш",
+            "types": [0],
+            "sizes": [26,30,40],
+            "price": 299,
+            "category": ["Острые", "Мясные"],
+            "rating": 4
+        },
+        {
+            "id": 5,
+            "imageUrl": "https://dodopizza-a.akamaihd.net/static/Img/Products/b473722281944c78ae1d6532576f92fa_138x138.jpeg",
+            "name": "Домашняя",
+            "types": [0],
+            "sizes": [26,30,40],
+            "price": 439,
+            "category": ["Мясные"],
+            "rating": 4
+        },
+        {
+            "id": 6,
+            "imageUrl": "https://dodopizza-a.akamaihd.net/static/Img/Products/aa845b6e841241fbbff1a770b3ad3103_138x138.jpeg",
+            "name": "Ветчина и грибы",
+            "types": [0],
+            "sizes": [26,30,40],
+            "price": 389,
+            "category": ["Мясные"],
+            "rating": 4
+        },
+        {
+            "id": 7,
+            "imageUrl": "https://dodopizza-a.akamaihd.net/static/Img/Products/57157f013c164840a24c1d49c7adb3b6_138x138.jpeg",
+            "name": "Цыпленок барбекю",
+            "types": [0],
+            "sizes": [26,30,40],
+            "price": 489,
+            "category": ["Гриль", "Мясные"],
+            "rating": 6
+        }
+    ]
+}
