@@ -6,8 +6,9 @@ function Categories({ onClick }) {
   return (
     <div className="categories">
       <ul>
-        {categories.map((title)=>{
+        {categories.map((title, index)=>{
           return <li 
+          key={title + index}
           className={activeCategoria === title ? 'active' : ''} 
           onClick={()=>{setActiveCategoria(title)}}
           >
