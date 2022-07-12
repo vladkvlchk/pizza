@@ -4,14 +4,19 @@ import Categories from './components/Categories';
 import PizzaBlock from './components/PizzaBlock';
 import Sort from './components/Sort';
 import React from 'react'
+import PBLoader from './components/PBLoader';
 
 function App() {
-  const [items, setItems] = React.useState([]);
+  const [items, setItems] = React.useState(['', '', '', '', '', '', '', '']);
+  const [isLoading, setIsLoading] = React.useState(true);
 
   React.useEffect(()=>{
     fetch('https://62cc94cda080052930ada9ff.mockapi.io/all')
     .then(res => res.json())
-    .then(arr => setItems(arr));
+    .then(arr => {
+      setItems(arr);
+      setIsLoading(false);
+    });
   },[]);
 
   return (
@@ -26,7 +31,7 @@ function App() {
           <h2 className="content__title">Все пиццы</h2>
           <div className="content__items">
             {items.map((obj, index) => {
-              return (
+              return ( isLoading ? <PBLoader /> :
                 <PizzaBlock
                   key={`${obj.title.split(' ').join('').toUpperCase}_${index}`}
                   {...obj}
