@@ -9,11 +9,18 @@ function Home() {
   const [items, setItems] = React.useState(['', '', '', '', '', '', '', '']);
   const [isLoading, setIsLoading] = React.useState(true);
   const [activeCategory, setActiveCategory] = React.useState('Все');
-  const [currentSort, setCurrentSort] = React.useState({name: 'популярности (DESC)', property: 'rating'});
+  const [currentSort, setCurrentSort] = React.useState({
+    name: 'популярности (DESC)',
+    property: 'rating',
+  });
 
   React.useEffect(() => {
+    const search = activeCategory === 'Все' ? '' : activeCategory;
+    const sortBy = currentSort.property.replace('-', '');
+    const order = currentSort.property[0] === '-' ? 'desc' : 'asc';
+
     fetch(
-      `https://62cc94cda080052930ada9ff.mockapi.io/all?search=${activeCategory === 'Все' ? '' : activeCategory}&sortBy=${currentSort.property}`,
+      `https://62cc94cda080052930ada9ff.mockapi.io/all?search=${search}&sortBy=${sortBy}&order=${order}`,
     )
       .then((res) => res.json())
       .then((arr) => {
