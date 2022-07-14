@@ -47,6 +47,10 @@ body {
     align-items: center;
     justify-content: space-between;
 
+    .categories {
+      width: 100%;
+    }
+
     @media (max-width: 1260px){
       flex-direction: column;
 
@@ -55,9 +59,8 @@ body {
       }
     }
 
-    ul{
+    .categories ul{
       display: flex;
-      width: 500px;
       overflow: scroll;
     }
   }
@@ -81,6 +84,11 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+
+  .content__items{
+    display: flex;
+    flex-direction: column;
   }
 
   .content__title {
