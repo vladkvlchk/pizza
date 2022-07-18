@@ -22,12 +22,13 @@ function Home() {
     const sortBy = currentSort.property.replace('-', '');
     const order = currentSort.property[0] === '-' ? 'desc' : 'asc';
 
-    axios.get(`https://62cc94cda080052930ada9ff.mockapi.io/all?page=${currentPage}&limit=${8}${category}&search=${searchValue}&sortBy=${sortBy}&order=${order}`)
+    axios
+    .get(`https://62cc94cda080052930ada9ff.mockapi.io/all?page=${currentPage}&limit=${8}${category}&search=${searchValue}&sortBy=${sortBy}&order=${order}`)
     .then(res => {
       setItems(res.data);
       setIsLoading(false);
     });
-    
+
     window.scrollTo(0, 0);
   }, [activeCategory, currentSort, currentPage, searchValue]);
 
