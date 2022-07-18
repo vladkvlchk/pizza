@@ -1,22 +1,20 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import Categories from '../components/Categories';
 import PizzaBlock from '../components/PizzaBlock';
 import Sort from '../components/Sort';
 import PBLoader from '../components/PBLoader';
 import Pagination from '../components/Pagination';
-import {SearchContext} from '../App';
+import { SearchContext } from '../App';
 
 function Home() {
+  const activeCategory = useSelector(state => state.filter.category);
+  const currentSort = useSelector(state => state.filter.sort);
   const [items, setItems] = React.useState(['', '', '', '', '', '', '', '']);
   const [isLoading, setIsLoading] = React.useState(true);
-  const [activeCategory, setActiveCategory] = React.useState('Все');
-  const [currentSort, setCurrentSort] = React.useState({
-    name: 'популярности (DESC)',
-    property: 'rating',
-  });
   const [currentPage, setCurrentPage] = React.useState(1);
-  const {searchValue} = React.useContext(SearchContext);
+  const { searchValue } = React.useContext(SearchContext);
 
   React.useEffect(() => {
     const category = activeCategory === 'Все' ? '' : '&category=' + activeCategory;
@@ -39,9 +37,8 @@ function Home() {
       <div className="content__top">
         <Categories
           value={activeCategory}
-          onChangeCategory={(newValue) => setActiveCategory(newValue)}
         />
-        <Sort value={currentSort} onChangeSort={(newValue) => setCurrentSort(newValue)} />
+        <Sort />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
