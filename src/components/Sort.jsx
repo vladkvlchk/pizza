@@ -2,18 +2,19 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { setSort } from '../redux/slices/filterSlice'
 
+const list = [
+  {name: 'популярности (DESC)', property: 'rating'},
+  {name: 'популярности (ASC)', property: '-rating'},
+  {name: 'цене (DESC)', property: 'price'},
+  {name: 'цене (ASC)', property: '-price'},
+  {name: 'алфавиту (DESC)', property: 'title'},
+  {name: 'алфавиту (ASC)', property: '-title'}
+];
+
 function Sort() {
   const value = useSelector(state => state.filter.sort); 
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = React.useState(false);
-  const list = [
-    {name: 'популярности (DESC)', property: 'rating'},
-    {name: 'популярности (ASC)', property: '-rating'},
-    {name: 'цене (DESC)', property: 'price'},
-    {name: 'цене (ASC)', property: '-price'},
-    {name: 'алфавиту (DESC)', property: 'title'},
-    {name: 'алфавиту (ASC)', property: '-title'}
-  ];
 
   const onClickSort = (name) => {
     setIsOpen(false);
