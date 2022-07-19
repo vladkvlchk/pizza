@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Categories from '../components/Categories';
 import PizzaBlock from '../components/PizzaBlock';
@@ -8,13 +8,13 @@ import Sort from '../components/Sort';
 import PBLoader from '../components/PBLoader';
 import Pagination from '../components/Pagination';
 import { SearchContext } from '../App';
+import { setCurrentPage } from '../redux/slices/filterSlice';
 
 function Home() {
-  const activeCategory = useSelector(state => state.filter.category);
-  const currentSort = useSelector(state => state.filter.sort);
+  const dispatch = useDispatch();
+  const { activeCategory, currentSort, currentPage } = useSelector((state) => state.filter);
   const [items, setItems] = React.useState(['', '', '', '', '', '', '', '']);
   const [isLoading, setIsLoading] = React.useState(true);
-  const [currentPage, setCurrentPage] = React.useState(1);
   const { searchValue } = React.useContext(SearchContext);
 
   React.useEffect(() => {
@@ -23,11 +23,13 @@ function Home() {
     const order = currentSort.property[0] === '-' ? 'desc' : 'asc';
 
     axios
-    .get(`https://62cc94cda080052930ada9ff.mockapi.io/all?page=${currentPage}&limit=${8}${category}&search=${searchValue}&sortBy=${sortBy}&order=${order}`)
-    .then(res => {
-      setItems(res.data);
-      setIsLoading(false);
-    });
+      .get(
+        `https://62cc94cda080052930ada9ff.mockapi.io/all?page=${currentPage}&limit=${8}${category}&search=${searchValue}&sortBy=${sortBy}&order=${order}`,
+      )
+      .then((res) => {
+        setItems(res.data);
+        setIsLoading(false);
+      });
 
     window.scrollTo(0, 0);
   }, [activeCategory, currentSort, currentPage, searchValue]);
@@ -35,9 +37,7 @@ function Home() {
   return (
     <div className="container">
       <div className="content__top">
-        <Categories
-          value={activeCategory}
-        />
+        <Categories value={activeCategory} />
         <Sort />
       </div>
       <h2 className="content__title">Все пиццы</h2>
@@ -50,7 +50,7 @@ function Home() {
           );
         })}
       </div>
-      <Pagination onChangePage={(number) => setCurrentPage(number)} />
+      <Pagination onChangePage={(number) => dispatch(setCurrentPage(number))} />
     </div>
   );
 }
