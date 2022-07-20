@@ -3,21 +3,32 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import CartItem from '../components/CartItem';
 import { clearCart } from '../redux/slices/cartSlice';
+import CartEmpty from '../components/CartEmpty';
 
 function Cart() {
   const dispatch = useDispatch();
-  const items = useSelector(state => state.cart.items);
-  const totalPrice = useSelector(state => state.cart.totalPrice);
+  const items = useSelector((state) => state.cart.items);
+  const totalPrice = useSelector((state) => state.cart.totalPrice);
 
   const countOfPizzas = () => {
-    return items.reduce((sum, obj) => {return sum + obj.count}, 0);
-  }
+    return items.reduce((sum, obj) => {
+      return sum + obj.count;
+    }, 0);
+  };
 
-  const onClickClear = () => dispatch(clearCart());
+  const onClickClear = () => {
+    if (window.confirm('Очистить корзину?')) {
+      dispatch(clearCart());
+    }
+  };
+
+  if(!totalPrice){
+    return (<CartEmpty />)
+  }
 
   return (
     <div className="container container--cart">
-      <div className="cart">
+      {<div className="cart">
         <div className="cart__top">
           <h2 className="content__title">
             <svg
@@ -91,7 +102,7 @@ function Cart() {
           </div>
         </div>
         <div className="content__items">
-          {items.map((obj,index) => (
+          {items.map((obj, index) => (
             <CartItem key={`${index}_${obj.title}_${obj.type}_${obj.size}`} {...obj} />
           ))}
         </div>
@@ -130,7 +141,7 @@ function Cart() {
             </div>
           </div>
         </div>
-      </div>
+      </div>}
     </div>
   );
 }
