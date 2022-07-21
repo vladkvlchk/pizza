@@ -9,18 +9,16 @@ import PizzaBlock from '../components/PizzaBlock';
 import Sort, { sortList } from '../components/Sort';
 import PBLoader from '../components/PBLoader';
 import Pagination from '../components/Pagination';
-import { SearchContext } from '../App';
-import { setCurrentPage, setFilters } from '../redux/slices/filterSlice';
-import { fetchPizzas } from '../redux/slices/pizzaSlice';
+import { setCurrentPage, setFilters, selectFilter } from '../redux/slices/filterSlice';
+import { fetchPizzas, selectPizza } from '../redux/slices/pizzaSlice';
 
 function Home() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const isMounted = React.useRef(false);
-  const { activeCategory, currentSort, currentPage } = useSelector((state) => state.filter);
-  const { items, status } = useSelector((state) => state.pizza);
-  const { searchValue } = React.useContext(SearchContext);
+  const { activeCategory, currentSort, currentPage, searchValue } = useSelector(selectFilter);
+  const { items, status } = useSelector(selectPizza);
 
   const getPizzas = async () => {
     const category = activeCategory === 'Все' ? '' : '&category=' + activeCategory;

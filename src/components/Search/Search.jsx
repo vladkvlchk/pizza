@@ -1,13 +1,14 @@
 import React from 'react';
 import debounce from 'lodash.debounce';
+import { useSelector, useDispatch } from 'react-redux';
 
 import style from './Search.module.scss';
-import { SearchContext } from '../../App';
+import { setSearchValue } from '../../redux/slices/filterSlice'
 
 function Search() {
+  const dispatch = useDispatch();
   const [value, setValue] = React.useState('');
   const inputRef = React.createRef();
-  const { setSearchValue } = React.useContext(SearchContext);
 
   const onChangeInput = React.useCallback((e) => {
     setValue(e.target.value);
@@ -16,14 +17,15 @@ function Search() {
 
   const updateSearchRequest = React.useCallback(
     debounce(str => {
-      setSearchValue(str);
+      dispatch(setSearchValue(str));
     }, 1000)
   );
 
   const onClickClear = () => {
     setValue('');
     inputRef.current.focus();
-    setSearchValue(value);
+    dispatch(setSearchValue(''));
+    console.log('при очистке отправили: ', value);
   };
 
   return (

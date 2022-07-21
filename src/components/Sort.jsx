@@ -1,18 +1,18 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux'
-import { setCurrentSort } from '../redux/slices/filterSlice'
+import { useSelector, useDispatch } from 'react-redux';
+import { selectFilterCurrentSort, setCurrentSort } from '../redux/slices/filterSlice';
 
 export const sortList = [
-  {name: 'популярности (DESC)', property: 'rating'},
-  {name: 'популярности (ASC)', property: '-rating'},
-  {name: 'цене (DESC)', property: 'price'},
-  {name: 'цене (ASC)', property: '-price'},
-  {name: 'алфавиту (DESC)', property: 'title'},
-  {name: 'алфавиту (ASC)', property: '-title'}
+  { name: 'популярности (DESC)', property: 'rating' },
+  { name: 'популярности (ASC)', property: '-rating' },
+  { name: 'цене (DESC)', property: 'price' },
+  { name: 'цене (ASC)', property: '-price' },
+  { name: 'алфавиту (DESC)', property: 'title' },
+  { name: 'алфавиту (ASC)', property: '-title' },
 ];
 
 function Sort() {
-  const value = useSelector(state => state.filter.currentSort); 
+  const value = useSelector(selectFilterCurrentSort);
   const dispatch = useDispatch();
   const componentRef = React.useRef();
   const [isOpen, setIsOpen] = React.useState(false);
@@ -22,16 +22,16 @@ function Sort() {
     dispatch(setCurrentSort(name));
   };
 
-  React.useEffect(()=>{
+  React.useEffect(() => {
     const handleClickOutside = (event) => {
-      if (!event.path.includes(componentRef.current)){
+      if (!event.path.includes(componentRef.current)) {
         setIsOpen(false);
       }
-    }
+    };
     document.body.addEventListener('click', handleClickOutside);
 
-    return () => document.body.removeEventListener('click', handleClickOutside)
-  },[]);
+    return () => document.body.removeEventListener('click', handleClickOutside);
+  }, []);
 
   return (
     <div ref={componentRef} className="sort">
