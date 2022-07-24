@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { addItem, selectCartCountOfSingleItems, selectCartItems } from '../redux/slices/cartSlice';
+import { addItem, selectCartCountOfSingleItems } from '../redux/slices/cartSlice';
 
 function PizzaBlock({ id, title, price, imageUrl, sizes, types }) {
   const dispatch = useDispatch();
