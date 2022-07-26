@@ -14,16 +14,16 @@ export const sortList = [
 function Sort() {
   const value = useSelector(selectFilterCurrentSort);
   const dispatch = useDispatch();
-  const componentRef = React.useRef();
-  const [isOpen, setIsOpen] = React.useState(false);
+  const componentRef = React.useRef<HTMLDivElement>(null);
+  const [isOpen, setIsOpen] = React.useState<boolean>(false);
 
-  const onClickSort = (name) => {
+  const onClickSort = (newSort : {name:string, property: string}) => {
     setIsOpen(false);
-    dispatch(setCurrentSort(name));
+    dispatch(setCurrentSort(newSort));
   };
 
   React.useEffect(() => {
-    const handleClickOutside = (event) => {
+    const handleClickOutside = (event : any) => {
       if (!event.path.includes(componentRef.current)) {
         setIsOpen(false);
       }

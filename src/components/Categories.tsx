@@ -4,9 +4,9 @@ import { selectFilterActiveCategory, setActiveCategory } from '../redux/slices/f
 
 const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 
-function Categories() {
+const Categories: React.FC = () => {
   const dispatch = useDispatch();
-  const activeCategory = useSelector(selectFilterActiveCategory);
+  const activeCategory: string = useSelector(selectFilterActiveCategory);
 
   return (
     <div className="categories">
@@ -26,6 +26,6 @@ function Categories() {
       </ul>
     </div>
   );
-}
+};
 
 export default Categories;
