@@ -4,10 +4,19 @@ import { Link } from 'react-router-dom';
 
 import { addItem, selectCartCountOfSingleItems } from '../redux/slices/cartSlice';
 
-function PizzaBlock({ id, title, price, imageUrl, sizes, types }) {
+type PizzaBlockProps = {
+  id: string;
+  title: string;
+  price: number;
+  imageUrl: string;
+  sizes: number[];
+  types: string[];
+};
+
+const PizzaBlock: React.FC<PizzaBlockProps> = ({ id, title, price, imageUrl, sizes, types }) => {
   const dispatch = useDispatch();
-  const [activeSize, setActiveSize] = React.useState(sizes[0]);
-  const [activeType, setActiveType] = React.useState(types[0]);
+  const [activeSize, setActiveSize] = React.useState<number>(sizes[0]);
+  const [activeType, setActiveType] = React.useState<string>(types[0]);
   const countItem = useSelector(selectCartCountOfSingleItems({ id, activeType, activeSize }));
 
   const onClickAdd = () => {
@@ -74,6 +83,6 @@ function PizzaBlock({ id, title, price, imageUrl, sizes, types }) {
       </div>
     </div>
   );
-}
+};
 
 export default PizzaBlock;

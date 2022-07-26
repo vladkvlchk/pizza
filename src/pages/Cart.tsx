@@ -4,14 +4,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import CartItem from '../components/CartItem';
 import { clearCart, selectCartTotalPrice, selectCartItems } from '../redux/slices/cartSlice';
 import CartEmpty from '../components/CartEmpty';
+import React from 'react';
 
-function Cart() {
+const Cart : React.FC = () => {
   const dispatch = useDispatch();
-  const items = useSelector(selectCartItems);
+  const items : any = useSelector(selectCartItems);
   const totalPrice = useSelector(selectCartTotalPrice);
 
   const countOfPizzas = () => {
-    return items.reduce((sum, obj) => {
+    return items.reduce((sum : number, obj: {count : number}) => {
       return sum + obj.count;
     }, 0);
   };
@@ -103,7 +104,7 @@ function Cart() {
             </div>
           </div>
           <div className="content__items">
-            {items.map((obj, index) => (
+            {items.map((obj : any, index : number) => (
               <CartItem key={`${index}_${obj.title}_${obj.type}_${obj.size}`} {...obj} />
             ))}
           </div>

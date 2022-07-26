@@ -11,7 +11,7 @@ import Pagination from '../components/Pagination';
 import { setCurrentPage, setFilters, selectFilter } from '../redux/slices/filterSlice';
 import { fetchPizzas, selectPizza } from '../redux/slices/pizzaSlice';
 
-function Home() {
+const Home : React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -20,10 +20,10 @@ function Home() {
   const { items, status } = useSelector(selectPizza);
 
   const getPizzas = async () => {
-    const category = activeCategory === 'Все' ? '' : '&category=' + activeCategory;
-    const sortBy = currentSort.property.replace('-', '');
-    const order = currentSort.property[0] === '-' ? 'desc' : 'asc';
-
+    const category : string = activeCategory === 'Все' ? '' : '&category=' + activeCategory;
+    const sortBy : string = currentSort.property.replace('-', '');
+    const order : string = currentSort.property[0] === '-' ? 'desc' : 'asc';
+    //@ts-ignore
     dispatch(fetchPizzas({ category, sortBy, order, currentPage, searchValue }));
 
     window.scrollTo(0, 0);
@@ -56,13 +56,13 @@ function Home() {
   return (
     <div className="container">
       <div className="content__top">
-        <Categories value={activeCategory} />
+        <Categories />
         <Sort />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
         {items[0] &&
-          items.map((obj, index) => {
+          items.map((obj : any, index: number) => {
             return status === 'loading' ? (
               <PBLoader key={index} />
             ) : (
@@ -70,7 +70,7 @@ function Home() {
             );
           })}
       </div>
-      <Pagination onChangePage={(number) => dispatch(setCurrentPage(number))} />
+      <Pagination onChangePage={(num : number) => dispatch(setCurrentPage(num))} />
     </div>
   );
 }
