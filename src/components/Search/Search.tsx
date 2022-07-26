@@ -10,7 +10,7 @@ const Search : React.FC = () => {
   const [value, setValue] = React.useState<string>('');
   const inputRef = React.createRef<HTMLInputElement>();
 
-  const onChangeInput = (event: any) => {
+  const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
     updateSearchRequest(event.target.value);
   };
@@ -26,7 +26,6 @@ const Search : React.FC = () => {
     setValue('');
     inputRef.current?.focus();
     dispatch(setSearchValue(''));
-    console.log('при очистке отправили: ', value);
   };
 
   return (
