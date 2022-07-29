@@ -26,7 +26,7 @@ const Header : React.FC = () => {
             </div>
           </div>
         </Link>
-        <Search />
+        {location.pathname !== '/cart' && <Search />}
         {location.pathname !== '/cart' && <Link to="/cart">
           <div className="header__cart">
             <button className="button" style={{ padding: 0 }}>
