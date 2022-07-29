@@ -1,6 +1,6 @@
 import React from 'react';
 import qs from 'qs';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import Categories from '../components/Categories';
@@ -10,10 +10,11 @@ import PBLoader from '../components/PBLoader';
 import Pagination from '../components/Pagination';
 import { setCurrentPage, setFilters, selectFilter } from '../redux/slices/filterSlice';
 import { fetchPizzas, selectPizza } from '../redux/slices/pizzaSlice';
+import { UseAppDispatch } from '../redux/store';
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = UseAppDispatch();
 
   const isMounted = React.useRef(false);
   const { activeCategory, currentSort, currentPage, searchValue } = useSelector(selectFilter);
@@ -23,7 +24,7 @@ const Home: React.FC = () => {
     const category: string = activeCategory === 'Все' ? '' : '&category=' + activeCategory;
     const sortBy: string = currentSort.property.replace('-', '');
     const order: string = currentSort.property[0] === '-' ? 'desc' : 'asc';
-    //@ts-ignore
+
     dispatch(fetchPizzas({ category, sortBy, order, currentPage, searchValue }));
 
     window.scrollTo(0, 0);
@@ -46,7 +47,16 @@ const Home: React.FC = () => {
   React.useEffect(() => {
     const params = qs.parse(window.location.search.substring(1));
     const sort = sortList.find((obj) => obj.property === params.sortProperty);
-    dispatch(setFilters({ ...params, sort }));
+    dispatch(setFilters({
+      ...params, sort,
+      searchValue: '',
+      activeCategory: '',
+      currentPage: 0,
+      currentSort: {
+        name: '',
+        property: ''
+      }
+    }));
   }, []);
 
   React.useEffect(() => {

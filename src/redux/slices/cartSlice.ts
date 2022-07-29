@@ -1,13 +1,14 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 
 type CartItem = {
   id: string;
   title: string;
+  imageUrl: string;
   price: number;
   type: string;
   size: number;
-  count: number;
+  count?: number;
 };
 
 interface CartSliceState {
@@ -24,7 +25,7 @@ export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addItem(state, action) {
+    addItem(state, action: PayloadAction<CartItem>) {
       const findItem = state.items.find((obj) => {
         return (
           obj.title === action.payload.title &&
@@ -33,7 +34,7 @@ export const cartSlice = createSlice({
         );
       });
 
-      if (findItem) {
+      if (findItem?.count) {
         findItem.count++;
       } else {
         state.items.push({
@@ -43,10 +44,10 @@ export const cartSlice = createSlice({
       }
 
       state.totalPrice = state.items.reduce((sum, obj) => {
-        return obj.price * obj.count + sum;
+        return obj.price * (obj.count ? obj.count : 1) + sum;
       }, 0);
     },
-    removeItem(state, action) {
+    removeItem(state, action: PayloadAction<CartItem>) {
       const findItem = state.items.find((obj) => {
         return (
           obj.title === action.payload.title &&
@@ -55,15 +56,15 @@ export const cartSlice = createSlice({
         );
       });
 
-      if (findItem && findItem.count > 1) {
+      if (findItem?.count && findItem.count > 1) {
         findItem.count--;
       }
 
       state.totalPrice = state.items.reduce((sum, obj) => {
-        return obj.price * obj.count + sum;
+        return obj.price * (obj.count ? obj.count : 1) + sum;
       }, 0);
     },
-    clearItem(state, action) {
+    clearItem(state, action: PayloadAction<CartItem>) {
       state.items = state.items.filter((obj) => {
         return !(
           obj.id === action.payload.id &&
@@ -97,7 +98,7 @@ export const selectCartCountOfSingleItems = ({
 }) => {
   return (state: RootState) =>
     state.cart.items.find(
-      (obj) => obj.id === id && obj.type === activeType && obj.size === activeSize,
+      (obj : CartItem) => obj.id === id && obj.type === activeType && obj.size === activeSize,
     );
 };
 

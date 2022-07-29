@@ -1,6 +1,7 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectFilterCurrentSort, setCurrentSort } from '../redux/slices/filterSlice';
+import { UseAppDispatch } from '../redux/store';
 
 export const sortList = [
   { name: 'популярности (DESC)', property: 'rating' },
@@ -13,17 +14,17 @@ export const sortList = [
 
 function Sort() {
   const value = useSelector(selectFilterCurrentSort);
-  const dispatch = useDispatch();
+  const dispatch = UseAppDispatch();
   const componentRef = React.useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
 
-  const onClickSort = (newSort : {name:string, property: string}) => {
+  const onClickSort = (newSort: { name: string; property: string }) => {
     setIsOpen(false);
     dispatch(setCurrentSort(newSort));
   };
 
   React.useEffect(() => {
-    const handleClickOutside = (event : any) => {
+    const handleClickOutside = (event: any) => {
       if (!event.path.includes(componentRef.current)) {
         setIsOpen(false);
       }
@@ -57,7 +58,7 @@ function Sort() {
               return (
                 <li
                   key={obj.name}
-                  className={value === obj.name ? 'active' : ''}
+                  className={value.name === obj.name ? 'active' : ''}
                   onClick={() => onClickSort(obj)}>
                   {obj.name}
                 </li>
