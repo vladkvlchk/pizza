@@ -6,16 +6,16 @@ const CartEmpty : React.FC = () => {
   return (
     <div className="cart cart--empty">
       <h2>
-        Корзина пустая 😕
+        Cart is empty 😕
       </h2>
       <p>
-        Вероятней всего, вы не заказывали ещё пиццу.
+        Most likely, you didn't add the item to your cart.
         <br />
-        Для того, чтобы заказать пиццу, перейди на главную страницу.
+        To order pizza go to the main page.
       </p>
       <img src={image} alt="Empty cart" />
       <Link to="/" className="button button--black">
-        <span>Вернуться назад</span>
+        <span>Come back</span>
       </Link>
     </div>
   );

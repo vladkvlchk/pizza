@@ -3,10 +3,10 @@ import { FilterSliceState, Sort } from './types';
 
 const initialState: FilterSliceState = {
   searchValue: '',
-  activeCategory: 'Все',
+  activeCategory: 'All',
   currentPage: 1,
   currentSort: {
-    name: 'популярности (DESC)',
+    name: 'rating (DESC)',
     property: 'rating',
   },
 };

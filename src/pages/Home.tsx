@@ -20,7 +20,7 @@ const Home: React.FC = () => {
   const { items, status } = useSelector(selectPizza);
 
   const getPizzas = async () => {
-    const category: string = activeCategory === 'Все' ? '' : '&category=' + activeCategory;
+    const category: string = activeCategory === 'All' ? '' : '&category=' + activeCategory;
     const sortBy: string = currentSort.property.replace('-', '');
     const order: string = currentSort.property[0] === '-' ? 'desc' : 'asc';
 
@@ -71,7 +71,7 @@ const Home: React.FC = () => {
         <Categories />
         <Sort />
       </div>
-      <h2 className="content__title">Все пиццы</h2>
+      <h2 className="content__title">{activeCategory} pizzas</h2>
       <div className="content__items">
         {items[0] &&
           items.map((obj: any, index: number) => {

@@ -5,12 +5,12 @@ import { selectFilterCurrentSort } from '../redux/slices/filter/selectors';
 import { UseAppDispatch } from '../redux/store';
 
 export const sortList = [
-  { name: 'популярности (DESC)', property: 'rating' },
-  { name: 'популярности (ASC)', property: '-rating' },
-  { name: 'цене (DESC)', property: 'price' },
-  { name: 'цене (ASC)', property: '-price' },
-  { name: 'алфавиту (DESC)', property: 'title' },
-  { name: 'алфавиту (ASC)', property: '-title' },
+  { name: 'rating (DESC)', property: 'rating' },
+  { name: 'rating (ASC)', property: '-rating' },
+  { name: 'price (DESC)', property: 'price' },
+  { name: 'price (ASC)', property: '-price' },
+  { name: 'A-Z', property: 'title' },
+  { name: 'Z-A', property: '-title' },
 ];
 
 function Sort() {
@@ -49,7 +49,7 @@ function Sort() {
             fill="#2C2C2C"
           />
         </svg>
-        <b>Сортировка по:</b>
+        <b>Sorted by:</b>
         <span onClick={() => setIsOpen(!isOpen)}>{value.name}</span>
       </div>
       {isOpen && (

@@ -48,7 +48,7 @@ const CartItem : React.FC<CartItemType> = ({ id, imageUrl, title, type, size, pr
       <div className="cart__item-info">
         <h3>{title}</h3>
         <p>
-          {type} тесто, {size} см.
+          {type} dough, {size} cm.
         </p>
       </div>
       <div className="cart__item-count">

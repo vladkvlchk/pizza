@@ -22,7 +22,7 @@ const Header : React.FC = () => {
             <img width="38" src={logo} alt="Pizza logo" />
             <div>
               <h1>React Pizza</h1>
-              <p>самая вкусная пицца во вселенной</p>
+              <p>the most delicious in the universe</p>
             </div>
           </div>
         </Link>
