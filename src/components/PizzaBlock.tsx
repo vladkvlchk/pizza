@@ -3,7 +3,8 @@ import { useSelector } from 'react-redux';
 import { UseAppDispatch } from '../redux/store';
 import { Link } from 'react-router-dom';
 
-import { addItem, selectCartCountOfSingleItems } from '../redux/slices/cartSlice';
+import { addItem } from '../redux/slices/cart/slice';
+import { selectCartCountOfSingleItems } from '../redux/slices/cart/selectors';
 
 type PizzaBlockProps = {
   id: string;

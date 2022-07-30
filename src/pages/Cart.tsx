@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import CartItem from '../components/CartItem';
-import { clearCart, selectCartTotalPrice, selectCartItems } from '../redux/slices/cartSlice';
+import { clearCart } from '../redux/slices/cart/slice';
+import { selectCartTotalPrice, selectCartItems } from '../redux/slices/cart/selectors';
 import CartEmpty from '../components/CartEmpty';
 import React from 'react';
 import { UseAppDispatch } from '../redux/store';

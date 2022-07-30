@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { selectFilterCurrentSort, setCurrentSort } from '../redux/slices/filterSlice';
+import { setCurrentSort } from '../redux/slices/filter/slice';
+import { selectFilterCurrentSort } from '../redux/slices/filter/selectors';
 import { UseAppDispatch } from '../redux/store';
 
 export const sortList = [
