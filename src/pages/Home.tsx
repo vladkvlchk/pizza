@@ -3,13 +3,10 @@ import qs from 'qs';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import Categories from '../components/Categories';
-import PizzaBlock from '../components/PizzaBlock';
-import Sort, { sortList } from '../components/Sort';
-import PBLoader from '../components/PBLoader';
-import Pagination from '../components/Pagination';
+import { Categories, PizzaBlock, Skeleton, Pagination, Sort } from '../components';
+import { sortList } from '../components/Sort';
 import { setCurrentPage, setFilters } from '../redux/slices/filter/slice';
-import { selectFilter } from '../redux/slices/filter/selectors'
+import { selectFilter } from '../redux/slices/filter/selectors';
 import { fetchPizzas } from '../redux/slices/pizza/asyncActions';
 import { selectPizza } from '../redux/slices/pizza/selectors';
 import { UseAppDispatch } from '../redux/store';
@@ -49,16 +46,19 @@ const Home: React.FC = () => {
   React.useEffect(() => {
     const params = qs.parse(window.location.search.substring(1));
     const sort = sortList.find((obj) => obj.property === params.sortProperty);
-    dispatch(setFilters({
-      ...params, sort,
-      searchValue: '',
-      activeCategory: '',
-      currentPage: 0,
-      currentSort: {
-        name: '',
-        property: ''
-      }
-    }));
+    dispatch(
+      setFilters({
+        ...params,
+        sort,
+        searchValue: '',
+        activeCategory: '',
+        currentPage: 0,
+        currentSort: {
+          name: '',
+          property: '',
+        },
+      }),
+    );
   }, []);
 
   React.useEffect(() => {
@@ -76,7 +76,7 @@ const Home: React.FC = () => {
         {items[0] &&
           items.map((obj: any, index: number) => {
             return status === 'loading' ? (
-              <PBLoader key={index} />
+              <Skeleton key={index} />
             ) : (
               <PizzaBlock key={`${obj.title}_${index}`} {...obj} />
             );

@@ -1,20 +1,19 @@
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import CartItem from '../components/CartItem';
+import { CartItem, CartEmpty } from '../components';
 import { clearCart } from '../redux/slices/cart/slice';
 import { selectCartTotalPrice, selectCartItems } from '../redux/slices/cart/selectors';
-import CartEmpty from '../components/CartEmpty';
 import React from 'react';
 import { UseAppDispatch } from '../redux/store';
 
-const Cart : React.FC = () => {
+const Cart: React.FC = () => {
   const dispatch = UseAppDispatch();
-  const items : any = useSelector(selectCartItems);
+  const items: any = useSelector(selectCartItems);
   const totalPrice = useSelector(selectCartTotalPrice);
 
   const countOfPizzas = () => {
-    return items.reduce((sum : number, obj: {count : number}) => {
+    return items.reduce((sum: number, obj: { count: number }) => {
       return sum + obj.count;
     }, 0);
   };
@@ -106,7 +105,7 @@ const Cart : React.FC = () => {
             </div>
           </div>
           <div className="content__items">
-            {items.map((obj : any, index : number) => (
+            {items.map((obj: any, index: number) => (
               <CartItem key={`${index}_${obj.title}_${obj.type}_${obj.size}`} {...obj} />
             ))}
           </div>
@@ -149,6 +148,6 @@ const Cart : React.FC = () => {
       }
     </div>
   );
-}
+};
 
 export default Cart;

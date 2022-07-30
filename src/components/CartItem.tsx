@@ -2,18 +2,9 @@ import React from 'react';
 import { UseAppDispatch } from '../redux/store';
 
 import { addItem, removeItem, clearItem } from '../redux/slices/cart/slice';
+import { CartItem as CartItemType } from '../redux/slices/cart/types';
 
-type CartItemProps = {
-  id: string;
-  imageUrl: string;
-  title: string;
-  type: string;
-  size: number;
-  price: number;
-  count: number;
-}
-
-const CartItem : React.FC<CartItemProps> = ({ id, imageUrl, title, type, size, price, count }) => {
+const CartItem : React.FC<CartItemType> = ({ id, imageUrl, title, type, size, price, count }) => {
   const dispatch = UseAppDispatch();
 
   const onPlus = () => {
@@ -98,7 +89,7 @@ const CartItem : React.FC<CartItemProps> = ({ id, imageUrl, title, type, size, p
         </div>
       </div>
       <div className="cart__item-price">
-        <b>{price * count} ₴</b>
+        <b>{price * (count ? count : 1)} ₴</b>
       </div>
       <div onClick={onClear} className="cart__item-remove">
         <div className="button button--outline button--circle">
